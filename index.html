@@ -302,7 +302,7 @@
               {/* Value Prop */}
               <div style={{ textAlign: 'center', marginBottom: 96 }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 999, background: 'rgba(59,130,246,0.1)', color: '#60a5fa', fontSize: 14, fontWeight: 700, marginBottom: 32, border: '1px solid rgba(59,130,246,0.2)' }}>
-                  <Sparkles size={16} /> Featured on the App Store
+                  Featured on the App Store
                 </div>
                 <h2 style={{ fontSize: 'clamp(2.5rem,7vw,4.5rem)', fontWeight: 900, marginBottom: 32, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 32px' }}>
                   Stop leaving the <span style={{ color: '#007AFF' }}>chat</span> to schedule.
@@ -312,27 +312,7 @@
                 </p>
               </div>
 
-              {/* Feature Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24, marginBottom: 96 }}>
-                {[
-                  { icon: <Calendar size={24} style={{ color: '#007AFF' }} />, bg: 'rgba(0,122,255,0.1)', title: 'Instant Polls', desc: 'Create a grid for the week in two taps. Everyone votes right in the bubble.' },
-                  { icon: <Users size={24} style={{ color: '#34C759' }} />, bg: 'rgba(52,199,89,0.1)', title: 'Native Feel', desc: "Designed to look and feel like a part of iOS. Your friends won't even know it's an app." },
-                  { icon: <Zap size={24} style={{ color: '#a78bfa' }} />, bg: 'rgba(167,139,250,0.1)', title: 'No Friction', desc: 'Zero signup required. If they have an iPhone, they can vote instantly.' },
-                ].map(({ icon, bg, title, desc }) => (
-                  <div key={title} className="feature-card" style={{
-                    background: '#161618', padding: 28, borderRadius: 28, border: '1px solid #222',
-                    transition: 'border-color 0.3s, transform 0.3s'
-                  }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = '#333'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = '#222'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-                    <div style={{ width: 48, height: 48, background: bg, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                      {icon}
-                    </div>
-                    <h4 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 8px' }}>{title}</h4>
-                    <p style={{ color: '#6b7280', lineHeight: 1.6, fontSize: 14, margin: 0 }}>{desc}</p>
-                  </div>
-                ))}
-              </div>
+
 
               {/* CTA */}
               <div style={{ background: 'linear-gradient(135deg, #007AFF, #0051AA)', borderRadius: 36, padding: 40, textAlign: 'center', position: 'relative', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,122,255,0.3)' }}>
@@ -343,14 +323,46 @@
                   <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 16, margin: '0 auto 32px', maxWidth: 480 }}>
                     Join 50,000+ friend groups scheduling smarter with LinkUp.
                   </p>
-                  <button
-                    style={{ background: 'white', color: 'black', padding: '16px 32px', borderRadius: 999, fontWeight: 700, fontSize: 18, display: 'inline-flex', alignItems: 'center', gap: 8, border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 8px 30px rgba(0,0,0,0.3)' }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1.05)'}>
-                    <Download size={20} /> Get on App Store
-                  </button>
+                  <form style={{ display: 'flex', gap: 8, justifyContent: 'center', maxWidth: 400, margin: '0 auto' }} onSubmit={async e => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const data = new FormData(form);
+                    try {
+                      await fetch('https://formspree.io/f/xlgokroo', {
+                        method: 'POST',
+                        body: data,
+                        headers: {
+                          'Accept': 'application/json'
+                        }
+                      });
+                      alert('Added to waitlist!');
+                      form.reset();
+                    } catch (err) {
+                      alert('Oops! There was a problem joining the waitlist.');
+                    }
+                  }}>
+                    <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                      <span style={{ position: 'absolute', left: 16, color: '#8e8e93', fontSize: 16, fontWeight: 500 }}>@</span>
+                      <input
+                        name="instagram_handle"
+                        type="text"
+                        placeholder="instagram_handle"
+                        style={{ width: '100%', background: 'rgba(0,0,0,0.2)', color: 'white', padding: '16px 16px 16px 36px', borderRadius: 999, border: '1px solid rgba(255,255,255,0.3)', fontSize: 16, outline: 'none', transition: 'border-color 0.2s, background 0.2s' }}
+                        onFocus={e => { e.currentTarget.style.borderColor = 'white'; e.currentTarget.style.background = 'rgba(0,0,0,0.4)'; }}
+                        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.background = 'rgba(0,0,0,0.2)'; }}
+                        required
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      style={{ background: 'white', color: 'black', padding: '16px 24px', borderRadius: 999, fontWeight: 700, fontSize: 16, display: 'inline-flex', alignItems: 'center', gap: 8, border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 8px 30px rgba(0,0,0,0.3)', whiteSpace: 'nowrap' }}
+                      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                      onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
+                      onMouseUp={e => e.currentTarget.style.transform = 'scale(1.05)'}>
+                      Join Waitlist
+                    </button>
+                  </form>
                 </div>
                 <div style={{ position: 'absolute', top: 0, right: 0, width: 256, height: 256, background: 'rgba(255,255,255,0.08)', filter: 'blur(80px)', borderRadius: '50%', transform: 'translate(50%,-50%)' }} />
               </div>
