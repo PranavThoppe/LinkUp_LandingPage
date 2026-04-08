@@ -296,8 +296,8 @@
           </section>
 
           {/* ── 2. MARKETING SECTION ── */}
-          <section style={{ position: 'relative', background: '#0a0a0a', padding: '40px 24px 160px', zIndex: 10 }}>
-            <div style={{ maxWidth: 896, margin: '0 auto' }}>
+          <section style={{ position: 'relative', background: '#0a0a0a', padding: '40px 24px 24px', zIndex: 10, minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ maxWidth: 896, width: '100%', margin: '0 auto', flex: 1, display: 'flex', flexDirection: 'column' }}>
 
               {/* Value Prop */}
               <div style={{ textAlign: 'center', marginBottom: 96 }}>
@@ -368,7 +368,7 @@
               </div>
 
               {/* Footer */}
-              <footer style={{ marginTop: 96, paddingTop: 32, borderTop: '1px solid #222', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+              <footer style={{ marginTop: 'auto', paddingTop: 32, paddingBottom: 16, borderTop: '1px solid #222', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <img src="LinkUp-Logo.png" alt="LinkUp Logo" style={{ width: 32, height: 32, borderRadius: 8 }} />
                   <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: '-0.02em' }}>LinkUp</span>
