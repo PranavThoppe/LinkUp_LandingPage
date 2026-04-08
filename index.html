@@ -148,7 +148,7 @@
         const key = `${d}-${t}`;
         setSlots(prev => ({ ...prev, [key]: !prev[key] }));
       };
-      if (!visible) return <div style={{ height: 128, opacity: 0 }} />;
+      if (!visible) return <div style={{ height: 350, opacity: 0 }} />;
       return (
         <div className="animate-zoom" style={{
           width: '100%', background: '#121212', border: '1px solid #333',
@@ -260,8 +260,9 @@
             <div style={{
               flex: 1, paddingTop: 96, paddingBottom: 80, padding: '96px 16px 80px',
               maxWidth: 640, margin: '0 auto', width: '100%',
-              display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'
+              display: 'flex', flexDirection: 'column'
             }}>
+              <div style={{ flex: 1 }} />
               <div style={{ textAlign: 'center', fontSize: 10, color: '#8e8e93', fontWeight: 700, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.4 }}>
                 Today 10:41 AM
               </div>
