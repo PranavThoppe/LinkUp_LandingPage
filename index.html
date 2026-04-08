@@ -323,7 +323,7 @@
                   <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 16, margin: '0 auto 32px', maxWidth: 480 }}>
                     Join 50,000+ friend groups scheduling smarter with LinkUp.
                   </p>
-                  <form style={{ display: 'flex', gap: 8, justifyContent: 'center', maxWidth: 400, margin: '0 auto' }} onSubmit={async e => {
+                  <form style={{ display: 'flex', flexDirection: 'column', gap: 16, justifyContent: 'center', maxWidth: 400, margin: '0 auto' }} onSubmit={async e => {
                     e.preventDefault();
                     const form = e.currentTarget;
                     const data = new FormData(form);
@@ -355,7 +355,7 @@
                     </div>
                     <button
                       type="submit"
-                      style={{ background: 'white', color: 'black', padding: '16px 24px', borderRadius: 999, fontWeight: 700, fontSize: 16, display: 'inline-flex', alignItems: 'center', gap: 8, border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 8px 30px rgba(0,0,0,0.3)', whiteSpace: 'nowrap' }}
+                      style={{ background: 'white', color: 'black', padding: '16px 24px', borderRadius: 999, fontWeight: 700, fontSize: 16, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 8px 30px rgba(0,0,0,0.3)', whiteSpace: 'nowrap', width: '100%' }}
                       onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                       onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                       onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
