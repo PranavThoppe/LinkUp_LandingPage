@@ -44,6 +44,19 @@
       }
     }
 
+    @keyframes typing-bounce {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-4px);
+      }
+    }
+
     .animate-zoom {
       animation: zoom-in-95 0.7s ease forwards;
     }
@@ -213,6 +226,50 @@
       );
     };
 
+    const TypingIndicator = () => (
+      <div style={{
+        display: 'flex', width: '100%', marginBottom: 8, justifyContent: 'flex-start',
+        animation: 'zoom-in-95 0.3s ease forwards'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '85%' }}>
+          <div style={{
+            padding: '12px 16px', borderRadius: 18,
+            background: '#262629', color: 'white',
+            borderBottomLeftRadius: 4,
+            display: 'flex', gap: 4, alignItems: 'center', height: 38,
+            boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+          }}>
+            <div style={{ width: 6, height: 6, background: '#8e8e93', borderRadius: '50%', animation: 'typing-bounce 1.4s infinite ease-in-out' }} />
+            <div style={{ width: 6, height: 6, background: '#8e8e93', borderRadius: '50%', animation: 'typing-bounce 1.4s infinite ease-in-out', animationDelay: '0.2s' }} />
+            <div style={{ width: 6, height: 6, background: '#8e8e93', borderRadius: '50%', animation: 'typing-bounce 1.4s infinite ease-in-out', animationDelay: '0.4s' }} />
+          </div>
+        </div>
+      </div>
+    );
+
+    const DelayedScrollMessage = ({ scrolled }) => {
+      const [phase, setPhase] = useState(0);
+
+      useEffect(() => {
+        const t1 = setTimeout(() => setPhase(1), 2000);
+        const t2 = setTimeout(() => setPhase(2), 3500);
+        return () => { clearTimeout(t1); clearTimeout(t2); };
+      }, []);
+
+      if (phase === 0) return null;
+
+      return (
+        <div style={{
+          transition: 'opacity 0.5s, transform 0.5s',
+          opacity: scrolled ? 0 : 1,
+          transform: scrolled ? 'translateY(10px)' : 'translateY(0)',
+          pointerEvents: 'none'
+        }}>
+          {phase === 1 ? <TypingIndicator /> : <MessageBubble text="scroll for more info 👇" />}
+        </div>
+      );
+    };
+
     // --- Main App ---
     function App() {
       const [scrolled, setScrolled] = useState(false);
@@ -263,14 +320,13 @@
               display: 'flex', flexDirection: 'column'
             }}>
               <div style={{ flex: 1 }} />
-              <div style={{ textAlign: 'center', fontSize: 10, color: '#8e8e93', fontWeight: 700, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.4 }}>
-                Today 10:41 AM
-              </div>
+
               <MessageBubble text="y'all free to hang this week?" sender="Sarah" delay={300} />
               <MessageBubble text="Check the poll 👇" isUser={true} delay={800} />
               <div style={{ marginBottom: 8 }}>
                 <InteractiveWidget delay={1200} />
               </div>
+              <DelayedScrollMessage scrolled={scrolled} />
             </div>
 
             {/* iMessage Input */}
